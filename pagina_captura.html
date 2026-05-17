@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checklist ABNT Gratuito — Nunca mais perca nota por formatação</title>
+<meta name="description" content="Baixe grátis o Checklist ABNT Simplificado e nunca mais perca nota por formatação. Para universitários brasileiros.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1a3a6e 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+    color: white;
+  }
+
+  .card {
+    background: white;
+    color: #111827;
+    border-radius: 24px;
+    padding: 48px 40px;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+  }
+
+  @media (max-width: 480px) {
+    .card { padding: 36px 24px; }
+  }
+
+  .badge {
+    display: inline-block;
+    background: #dcfce7;
+    color: #15803d;
+    font-family: 'Sora', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+
+  .emoji-grande {
+    font-size: 52px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(22px, 4vw, 28px);
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 14px;
+    color: #111827;
+  }
+
+  h1 span { color: #1a56db; }
+
+  .subtitulo {
+    font-size: 15px;
+    color: #6b7280;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .lista-beneficios {
+    list-style: none;
+    text-align: left;
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .lista-beneficios li {
+    font-size: 14px;
+    color: #374151;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .lista-beneficios li::before {
+    content: "✓";
+    color: #057a55;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .formulario input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    color: #111827;
+    background: white;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  .formulario input:focus {
+    border-color: #1a56db;
+  }
+
+  .formulario input::placeholder {
+    color: #9ca3af;
+  }
+
+  .btn-submit {
+    width: 100%;
+    background: #1a56db;
+    color: white;
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 16px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-submit:hover {
+    background: #1e429f;
+    transform: translateY(-1px);
+  }
+
+  .aviso {
+    margin-top: 14px;
+    font-size: 12px;
+    color: #9ca3af;
+    line-height: 1.6;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid #f3f4f6;
+    margin: 28px 0;
+  }
+
+  .oferta-link {
+    font-size: 13px;
+    color: #6b7280;
+  }
+
+  .oferta-link a {
+    color: #1a56db;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .oferta-link a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="badge">100% gratuito · entrega imediata</div>
+  <span class="emoji-grande">📋</span>
+  <h1>Baixe o <span>Checklist ABNT</span> Simplificado e nunca mais perca nota por formatação</h1>
+  <p class="subtitulo">Um guia direto ao ponto com as regras que realmente caem nos trabalhos universitários. Grátis, agora.</p>
+
+  <ul class="lista-beneficios">
+    <li>Configuração de página, capa e folha de rosto</li>
+    <li>Regras de citação (direta, indireta e apud)</li>
+    <li>Formatação de referências bibliográficas</li>
+    <li>Os erros mais comuns e como evitá-los</li>
+    <li>Baseado nas normas NBR 6023, 10520 e 14724</li>
+  </ul>
+
+  <!-- Substitua pela integração do seu provedor de email (Brevo, MailerLite, etc.) -->
+  <form class="formulario" action="SEU-LINK-DE-FORMULARIO-AQUI" method="POST">
+    <input type="text" name="nome" placeholder="Seu primeiro nome" required>
+    <input type="email" name="email" placeholder="Seu melhor email" required>
+    <button type="submit" class="btn-submit">Quero o checklist gratuito →</button>
+  </form>
+
+  <p class="aviso">🔒 Seus dados estão seguros. Nada de spam, prometido.<br>Você vai receber o checklist imediatamente no seu email.</p>
+
+  <hr class="divider">
+
+  <p class="oferta-link">Quer ir além? Conheça o <a href="pagina_vendas.html">Universitário IA Starter</a> — o kit completo por apenas R$27.</p>
+</div>
+
+</body>
+</html>
