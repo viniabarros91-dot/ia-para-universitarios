@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerador de Orçamento Grátis — Orçamento profissional em PDF em 2 minutos</title>
+<meta name="description" content="Monte um orçamento profissional para serviços de elétrica, pintura, marcenaria, reformas e mais. Grátis, sem cadastro: baixe em PDF ou envie pelo WhatsApp.">
+<meta property="og:title" content="Gerador de Orçamento Grátis">
+<meta property="og:description" content="Orçamento profissional em PDF em 2 minutos. Grátis e sem cadastro.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Gerador de Orçamento Grátis",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "pt-BR",
+  "description": "Ferramenta grátis para prestadores de serviço montarem orçamentos profissionais e enviarem em PDF ou pelo WhatsApp.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "O gerador de orçamento é grátis mesmo?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sim. Você monta, baixa em PDF e envia pelo WhatsApp quantos orçamentos quiser, sem cadastro." }
+    },
+    {
+      "@type": "Question",
+      "name": "Meus dados ficam salvos em algum servidor?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Não. Os dados do orçamento ficam só no seu navegador. Seus dados de profissional ficam guardados no próprio aparelho para você não precisar digitar de novo." }
+    },
+    {
+      "@type": "Question",
+      "name": "Como mando o orçamento em PDF pelo celular?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Toque em 'Baixar PDF', escolha 'Salvar como PDF' e depois envie o arquivo pelo WhatsApp. Ou toque em 'Enviar pelo WhatsApp' para mandar um resumo em texto direto para o cliente." }
+    },
+    {
+      "@type": "Question",
+      "name": "Que tipo de profissional pode usar?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Qualquer prestador de serviço: eletricista, pintor, encanador, marceneiro, pedreiro, gesseiro, técnico de ar-condicionado, jardineiro, diarista, entre outros." }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --azul: #1e3a8a;
+    --azul-2: #1d4ed8;
+    --azul-claro: #eff6ff;
+    --laranja: #f97316;
+    --laranja-escuro: #ea580c;
+    --verde: #16a34a;
+    --texto: #0f172a;
+    --texto-2: #475569;
+    --borda: #e2e8f0;
+    --fundo: #f8fafc;
+    --branco: #ffffff;
+    --erro: #dc2626;
+    --raio: 12px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--texto);
+    background: var(--fundo);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 16px; }
+  a { color: var(--azul-2); }
+
+  /* ===== TOPO ===== */
+  .topo {
+    background: var(--branco);
+    border-bottom: 1px solid var(--borda);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .topo .container { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 12px; }
+  .marca { font-weight: 800; font-size: 18px; color: var(--azul); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+  .marca span.icone { background: var(--laranja); color: white; width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; font-size: 12px; font-weight: 800; }
+  .marca { white-space: nowrap; }
+  @media (max-width: 420px) { .so-desktop { display: none; } .marca { font-size: 16px; } }
+  .topo .link-pro { font-size: 14px; font-weight: 600; text-decoration: none; background: var(--azul-claro); padding: 8px 14px; border-radius: 100px; white-space: nowrap; }
+
+  /* ===== HERO ===== */
+  .hero { background: linear-gradient(135deg, #0f172a 0%, var(--azul) 70%, var(--azul-2) 100%); color: white; padding: 48px 0 56px; text-align: center; }
+  .hero .selo { display: inline-block; background: rgba(249,115,22,.18); border: 1px solid rgba(249,115,22,.5); color: #fdba74; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; margin-bottom: 18px; }
+  .hero h1 { font-size: clamp(28px, 5vw, 44px); font-weight: 800; line-height: 1.15; max-width: 760px; margin: 0 auto 16px; }
+  .hero h1 em { font-style: normal; color: #fdba74; }
+  .hero p { font-size: 17px; color: rgba(255,255,255,.82); max-width: 600px; margin: 0 auto 28px; }
+  .hero .profissoes { font-size: 13px; color: rgba(255,255,255,.6); margin-top: 18px; }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-weight: 700; font-size: 15px; border: 0; border-radius: 10px; padding: 14px 22px; cursor: pointer; text-decoration: none; transition: transform .15s, background .15s, box-shadow .15s; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-laranja { background: var(--laranja); color: white; box-shadow: 0 8px 24px rgba(249,115,22,.3); }
+  .btn-laranja:hover { background: var(--laranja-escuro); }
+  .btn-verde { background: var(--verde); color: white; }
+  .btn-azul { background: var(--azul-2); color: white; }
+  .btn-claro { background: var(--branco); color: var(--texto); border: 1px solid var(--borda); }
+  .btn-pequeno { padding: 8px 12px; font-size: 13px; font-weight: 600; }
+
+  /* ===== FERRAMENTA ===== */
+  .ferramenta { padding: 40px 0 56px; }
+  .ferramenta-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+  @media (max-width: 900px) { .ferramenta-grid { grid-template-columns: minmax(0, 1fr); } }
+
+  .painel { background: var(--branco); border: 1px solid var(--borda); border-radius: var(--raio); padding: 20px; }
+  .painel + .painel { margin-top: 16px; }
+  .painel h2 { font-size: 16px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .painel h2 .num { background: var(--azul-claro); color: var(--azul-2); width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; }
+
+  .campos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .campos .inteiro { grid-column: 1 / -1; }
+  @media (max-width: 520px) { .campos { grid-template-columns: 1fr; } }
+  label { display: block; font-size: 13px; font-weight: 600; color: var(--texto-2); margin-bottom: 4px; }
+  input, select, textarea {
+    width: 100%; font-family: inherit; font-size: 15px; color: var(--texto);
+    background: var(--branco); border: 1px solid var(--borda); border-radius: 8px; padding: 10px 12px;
+  }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--azul-2); outline-offset: -1px; border-color: transparent; }
+  textarea { resize: vertical; min-height: 64px; }
+
+  .item { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 42px; gap: 8px; align-items: end; padding: 12px 0; border-bottom: 1px dashed var(--borda); }
+  .item:first-child { padding-top: 0; }
+  .item .desc-linha { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) 120px; gap: 8px; }
+  .item .remover { background: none; border: 1px solid var(--borda); color: var(--erro); border-radius: 8px; height: 42px; cursor: pointer; font-size: 18px; line-height: 1; }
+  @media (max-width: 520px) { .item .desc-linha { grid-template-columns: minmax(0, 1fr); } }
+  .add-item { margin-top: 12px; }
+  .logo-linha { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .logo-linha img { max-height: 40px; max-width: 120px; border-radius: 6px; border: 1px solid var(--borda); }
+  .dica { font-size: 12px; color: var(--texto-2); margin-top: 4px; }
+
+  /* ===== PREVIEW ===== */
+  .lado-preview { position: sticky; top: 76px; }
+  @media (max-width: 900px) { .lado-preview { position: static; } }
+  .acoes { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .acoes .btn { flex: 1 1 auto; }
+
+  .folha { background: white; border: 1px solid var(--borda); border-radius: var(--raio); padding: 28px; box-shadow: 0 12px 32px rgba(15,23,42,.08); font-size: 13px; color: #111827; }
+  .folha-topo { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 16px; border-bottom: 3px solid var(--azul); margin-bottom: 16px; }
+  .folha-topo .emp { display: flex; gap: 12px; align-items: flex-start; min-width: 0; }
+  .folha-topo .emp img { max-height: 56px; max-width: 110px; object-fit: contain; }
+  .folha-topo .emp-nome { font-size: 17px; font-weight: 800; color: var(--azul); overflow-wrap: anywhere; }
+  .folha-topo .emp-info { color: #4b5563; font-size: 12px; overflow-wrap: anywhere; }
+  .folha-topo .num-orc { text-align: right; flex-shrink: 0; }
+  .folha-topo .num-orc strong { display: block; font-size: 15px; text-transform: uppercase; letter-spacing: .5px; }
+  .folha-topo .num-orc span { display: block; color: #4b5563; font-size: 12px; }
+  .folha h3 { font-size: 11px; text-transform: uppercase; letter-spacing: .8px; color: #6b7280; margin: 14px 0 6px; }
+  .folha .cliente { overflow-wrap: anywhere; }
+  .folha table { width: 100%; border-collapse: collapse; margin-top: 4px; }
+  .folha th { text-align: left; background: #f1f5f9; font-size: 11px; text-transform: uppercase; letter-spacing: .4px; color: #475569; padding: 8px; }
+  .folha td { padding: 8px; border-bottom: 1px solid #f1f5f9; vertical-align: top; overflow-wrap: anywhere; }
+  .folha th.num, .folha td.num { text-align: right; white-space: nowrap; }
+  .folha .tipo-tag { display: inline-block; font-size: 10px; font-weight: 700; color: #64748b; background: #f1f5f9; border-radius: 4px; padding: 1px 6px; margin-left: 6px; }
+  .folha .totais { margin-left: auto; width: min(260px, 100%); margin-top: 10px; }
+  .folha .totais div { display: flex; justify-content: space-between; padding: 4px 0; }
+  .folha .totais .total { border-top: 2px solid var(--azul); margin-top: 4px; padding-top: 8px; font-size: 16px; font-weight: 800; color: var(--azul); }
+  .folha .condicoes { white-space: pre-line; overflow-wrap: anywhere; }
+  .folha .assinatura { margin-top: 36px; display: flex; gap: 24px; }
+  .folha .assinatura div { flex: 1; border-top: 1px solid #9ca3af; padding-top: 6px; text-align: center; font-size: 11px; color: #6b7280; }
+  .folha .vazio { color: #9ca3af; font-style: italic; }
+  .folha .rodape-folha { margin-top: 20px; font-size: 10px; color: #9ca3af; text-align: center; }
+
+  /* ===== PRO / LISTA DE ESPERA ===== */
+  .pro { background: var(--branco); border-top: 1px solid var(--borda); border-bottom: 1px solid var(--borda); padding: 56px 0; }
+  .pro-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+  @media (max-width: 900px) { .pro-grid { grid-template-columns: minmax(0, 1fr); } }
+  .pro .selo { display: inline-block; background: #fff7ed; color: var(--laranja-escuro); font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 6px 12px; border-radius: 100px; margin-bottom: 14px; }
+  .pro h2 { font-size: clamp(24px, 4vw, 34px); line-height: 1.2; margin-bottom: 12px; }
+  .pro p.sub { color: var(--texto-2); font-size: 16px; margin-bottom: 20px; }
+  .beneficios { list-style: none; display: grid; gap: 12px; }
+  .beneficios li { display: flex; gap: 12px; align-items: flex-start; }
+  .beneficios .ic { flex-shrink: 0; width: 34px; height: 34px; border-radius: 9px; background: var(--azul-claro); display: grid; place-items: center; font-size: 17px; }
+  .beneficios strong { display: block; font-size: 15px; }
+  .beneficios span { color: var(--texto-2); font-size: 14px; }
+  .exemplo-audio { margin-top: 20px; background: var(--fundo); border: 1px solid var(--borda); border-radius: var(--raio); padding: 16px; font-size: 14px; }
+  .exemplo-audio .fala { font-style: italic; color: var(--texto-2); }
+  .exemplo-audio .seta { color: var(--laranja); font-weight: 700; margin: 8px 0 4px; }
+
+  .form-espera { background: var(--fundo); border: 2px solid var(--azul-2); border-radius: 16px; padding: 24px; }
+  .form-espera h3 { font-size: 20px; margin-bottom: 4px; }
+  .form-espera .preco { font-size: 14px; color: var(--texto-2); margin-bottom: 16px; }
+  .form-espera .preco strong { color: var(--verde); }
+  .form-espera .campo { margin-bottom: 12px; }
+  .form-espera .btn { width: 100%; margin-top: 4px; }
+  .form-espera .consentimento { font-size: 12px; color: var(--texto-2); margin-top: 10px; }
+  .form-espera .msg { margin-top: 12px; font-size: 14px; font-weight: 600; display: none; }
+  .form-espera .msg.ok { display: block; color: var(--verde); }
+  .form-espera .msg.erro { display: block; color: var(--erro); }
+  .escondido { position: absolute; left: -9999px; }
+
+  /* ===== FAQ ===== */
+  .faq { padding: 56px 0; }
+  .faq h2 { font-size: clamp(22px, 4vw, 30px); text-align: center; margin-bottom: 24px; }
+  .faq-lista { max-width: 760px; margin: 0 auto; display: grid; gap: 10px; }
+  .faq details { background: var(--branco); border: 1px solid var(--borda); border-radius: var(--raio); padding: 16px 18px; }
+  .faq summary { font-weight: 600; cursor: pointer; }
+  .faq details p { margin-top: 10px; color: var(--texto-2); }
+
+  footer { text-align: center; font-size: 13px; color: var(--texto-2); padding: 28px 16px 40px; }
+
+  /* ===== IMPRESSÃO: só a folha do orçamento ===== */
+  @media print {
+    @page { size: A4; margin: 14mm; }
+    body { background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .topo, .hero, .pro, .faq, footer, .ferramenta-grid > div:first-child, .acoes { display: none !important; }
+    .ferramenta { padding: 0; }
+    .ferramenta .container { padding: 0; max-width: none; }
+    .ferramenta-grid { display: block; }
+    .lado-preview { position: static; }
+    #folha { border: 0; box-shadow: none; padding: 0; border-radius: 0; }
+    .folha table { page-break-inside: auto; }
+    .folha tr { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="container">
+    <a class="marca" href="#"><span class="icone">R$</span>Orçamento Pronto</a>
+    <a class="link-pro" href="#pro"><span class="so-desktop">Versão </span>PRO com IA ✨</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <span class="selo">Grátis · Sem cadastro</span>
+    <h1>Orçamento profissional em PDF <em>em 2 minutos</em></h1>
+    <p>Preencha, baixe em PDF e mande pelo WhatsApp. Cliente que recebe orçamento bonito e organizado fecha mais rápido.</p>
+    <a href="#ferramenta" class="btn btn-laranja">Montar meu orçamento grátis ↓</a>
+    <div class="profissoes">Eletricista · Pintor · Encanador · Marceneiro · Pedreiro · Gesseiro · Ar-condicionado · Jardineiro e outros</div>
+  </div>
+</section>
+
+<main>
+<section class="ferramenta" id="ferramenta">
+  <div class="container ferramenta-grid">
+
+    <!-- ===== FORMULÁRIO ===== -->
+    <div>
+      <div class="painel">
+        <h2><span class="num">1</span>Seus dados</h2>
+        <div class="campos">
+          <div class="inteiro">
+            <label for="emp-nome">Seu nome ou nome da empresa</label>
+            <input id="emp-nome" data-perfil placeholder="Ex.: João Elétrica e Manutenção">
+          </div>
+          <div>
+            <label for="emp-tel">WhatsApp / telefone</label>
+            <input id="emp-tel" data-perfil inputmode="tel" placeholder="(11) 99999-9999">
+          </div>
+          <div>
+            <label for="emp-doc">CPF ou CNPJ (opcional)</label>
+            <input id="emp-doc" data-perfil placeholder="00.000.000/0001-00">
+          </div>
+          <div>
+            <label for="emp-cidade">Cidade</label>
+            <input id="emp-cidade" data-perfil placeholder="Ex.: Campinas - SP">
+          </div>
+          <div>
+            <label for="emp-email">E-mail (opcional)</label>
+            <input id="emp-email" data-perfil type="email" placeholder="voce@email.com">
+          </div>
+          <div class="inteiro">
+            <label for="emp-logo">Logo (opcional)</label>
+            <div class="logo-linha">
+              <input id="emp-logo" type="file" accept="image/*" style="max-width: 260px;">
+              <img id="logo-mini" alt="" hidden>
+              <button type="button" class="btn btn-claro btn-pequeno" id="logo-remover" hidden>Remover logo</button>
+            </div>
+            <div class="dica">Seus dados ficam salvos só neste aparelho para o próximo orçamento.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="painel">
+        <h2><span class="num">2</span>Cliente</h2>
+        <div class="campos">
+          <div>
+            <label for="cli-nome">Nome do cliente</label>
+            <input id="cli-nome" placeholder="Ex.: Maria Souza">
+          </div>
+          <div>
+            <label for="cli-tel">WhatsApp do cliente</label>
+            <input id="cli-tel" inputmode="tel" placeholder="(11) 98888-8888">
+          </div>
+          <div class="inteiro">
+            <label for="cli-end">Endereço do serviço</label>
+            <input id="cli-end" placeholder="Rua, número, bairro">
+          </div>
+        </div>
+      </div>
+
+      <div class="painel">
+        <h2><span class="num">3</span>Serviços e materiais</h2>
+        <div id="itens"></div>
+        <button type="button" class="btn btn-claro btn-pequeno add-item" id="add-item">+ Adicionar item</button>
+        <div class="campos" style="margin-top: 16px;">
+          <div>
+            <label for="desconto">Desconto (R$)</label>
+            <input id="desconto" inputmode="decimal" placeholder="0,00">
+          </div>
+        </div>
+      </div>
+
+      <div class="painel">
+        <h2><span class="num">4</span>Condições</h2>
+        <div class="campos">
+          <div>
+            <label for="prazo">Prazo de execução</label>
+            <input id="prazo" placeholder="Ex.: 3 dias úteis">
+          </div>
+          <div>
+            <label for="validade">Validade do orçamento</label>
+            <select id="validade">
+              <option value="7">7 dias</option>
+              <option value="15" selected>15 dias</option>
+              <option value="30">30 dias</option>
+            </select>
+          </div>
+          <div class="inteiro">
+            <label for="pagamento">Forma de pagamento</label>
+            <input id="pagamento" data-perfil placeholder="Ex.: 50% na aprovação e 50% na entrega. Pix ou cartão.">
+          </div>
+          <div class="inteiro">
+            <label for="obs">Garantia e observações</label>
+            <textarea id="obs" data-perfil placeholder="Ex.: Garantia de 90 dias para a mão de obra. Materiais por conta do cliente, se não listados."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PRÉ-VISUALIZAÇÃO ===== -->
+    <div class="lado-preview">
+      <div class="acoes">
+        <button type="button" class="btn btn-azul" id="btn-pdf">⬇ Baixar PDF</button>
+        <button type="button" class="btn btn-verde" id="btn-whats">Enviar pelo WhatsApp</button>
+        <button type="button" class="btn btn-claro" id="btn-novo">Novo orçamento</button>
+      </div>
+
+      <article class="folha" id="folha" aria-label="Pré-visualização do orçamento">
+        <div class="folha-topo">
+          <div class="emp">
+            <img id="p-logo" alt="" hidden>
+            <div>
+              <div class="emp-nome" id="p-emp-nome"></div>
+              <div class="emp-info" id="p-emp-info"></div>
+            </div>
+          </div>
+          <div class="num-orc">
+            <strong>Orçamento</strong>
+            <span id="p-numero"></span>
+            <span id="p-data"></span>
+          </div>
+        </div>
+
+        <h3>Cliente</h3>
+        <div class="cliente" id="p-cliente"></div>
+
+        <h3>Descrição</h3>
+        <table>
+          <thead>
+            <tr><th>Item</th><th class="num">Qtd</th><th class="num">Valor unit.</th><th class="num">Total</th></tr>
+          </thead>
+          <tbody id="p-itens"></tbody>
+        </table>
+
+        <div class="totais" id="p-totais"></div>
+
+        <h3>Condições</h3>
+        <div class="condicoes" id="p-condicoes"></div>
+
+        <div class="assinatura">
+          <div id="p-assina-emp">Prestador</div>
+          <div>Cliente — de acordo</div>
+        </div>
+        <div class="rodape-folha">Feito com Orçamento Pronto — gerador de orçamento grátis</div>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== VERSÃO PRO / LISTA DE ESPERA ===== -->
+<section class="pro" id="pro">
+  <div class="container pro-grid">
+    <div>
+      <span class="selo">Em breve · Versão PRO com IA</span>
+      <h2>Mande um áudio. A IA monta o orçamento pra você.</h2>
+      <p class="sub">Chega de digitar orçamento no fim do dia. Descreva o serviço do seu jeito e receba o orçamento pronto, com os seus preços.</p>
+      <ul class="beneficios">
+        <li><span class="ic">🎙️</span><div><strong>Orçamento por áudio ou texto</strong><span>Fale como você fala com o cliente. A IA separa itens, quantidades e valores.</span></div></li>
+        <li><span class="ic">📋</span><div><strong>Sua tabela de preços salva</strong><span>Os valores que você cobra entram sozinhos em cada orçamento.</span></div></li>
+        <li><span class="ic">📁</span><div><strong>Histórico de clientes e orçamentos</strong><span>Encontre qualquer orçamento antigo em segundos e duplique com um toque.</span></div></li>
+        <li><span class="ic">🔔</span><div><strong>Lembrete de follow-up</strong><span>Avisa quando é hora de cobrar uma resposta do cliente, pra você não perder serviço.</span></div></li>
+        <li><span class="ic">✅</span><div><strong>Aprovação pelo link</strong><span>O cliente aprova o orçamento pelo celular e você recebe o aviso.</span></div></li>
+      </ul>
+      <div class="exemplo-audio">
+        <div class="fala">"Troca de 6 tomadas e 2 interruptores na casa da dona Maria, mais instalação de um chuveiro novo, material por conta dela."</div>
+        <div class="seta">↓ vira em segundos</div>
+        <div>Orçamento com 3 itens, seus preços, prazo, garantia e PDF pronto para enviar.</div>
+      </div>
+    </div>
+
+    <form class="form-espera" id="form-espera" name="lista-espera" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="lista-espera">
+      <p class="escondido"><label>Não preencha: <input name="bot-field"></label></p>
+      <h3>Entre na lista de espera</h3>
+      <p class="preco">Preço previsto: <span id="preco-pro">R$ 29/mês</span>. <strong>Quem está na lista ganha 50% de desconto nos 3 primeiros meses.</strong></p>
+      <div class="campo">
+        <label for="le-nome">Nome</label>
+        <input id="le-nome" name="nome" required autocomplete="name">
+      </div>
+      <div class="campo">
+        <label for="le-whats">WhatsApp</label>
+        <input id="le-whats" name="whatsapp" required inputmode="tel" autocomplete="tel" placeholder="(11) 99999-9999">
+      </div>
+      <div class="campo">
+        <label for="le-email">E-mail</label>
+        <input id="le-email" name="email" type="email" autocomplete="email">
+      </div>
+      <div class="campo">
+        <label for="le-prof">Sua profissão</label>
+        <select id="le-prof" name="profissao" required>
+          <option value="">Selecione…</option>
+          <option>Eletricista</option>
+          <option>Pintor</option>
+          <option>Encanador</option>
+          <option>Marceneiro</option>
+          <option>Pedreiro / reformas</option>
+          <option>Gesseiro / drywall</option>
+          <option>Ar-condicionado / refrigeração</option>
+          <option>Jardinagem / limpeza</option>
+          <option>Outra</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label for="le-qtd">Quantos orçamentos você faz por mês?</label>
+        <select id="le-qtd" name="orcamentos_mes" required>
+          <option value="">Selecione…</option>
+          <option>Até 5</option>
+          <option>6 a 15</option>
+          <option>16 a 30</option>
+          <option>Mais de 30</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-laranja">Quero entrar na lista</button>
+      <p class="consentimento">Usaremos seus dados só para avisar sobre o lançamento da versão PRO. Você pode pedir a exclusão a qualquer momento.</p>
+      <p class="msg" id="msg-espera" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="container">
+    <h2>Perguntas frequentes</h2>
+    <div class="faq-lista">
+      <details>
+        <summary>O gerador de orçamento é grátis mesmo?</summary>
+        <p>Sim. Você monta, baixa em PDF e envia pelo WhatsApp quantos orçamentos quiser, sem cadastro.</p>
+      </details>
+      <details>
+        <summary>Meus dados ficam salvos em algum servidor?</summary>
+        <p>Não. Os dados do orçamento ficam só no seu navegador. Seus dados de profissional ficam guardados no próprio aparelho para você não precisar digitar de novo.</p>
+      </details>
+      <details>
+        <summary>Como mando o orçamento em PDF pelo celular?</summary>
+        <p>Toque em "Baixar PDF", escolha "Salvar como PDF" e depois envie o arquivo pelo WhatsApp. Ou toque em "Enviar pelo WhatsApp" para mandar um resumo em texto direto para o cliente.</p>
+      </details>
+      <details>
+        <summary>Que tipo de profissional pode usar?</summary>
+        <p>Qualquer prestador de serviço: eletricista, pintor, encanador, marceneiro, pedreiro, gesseiro, técnico de ar-condicionado, jardineiro, diarista, entre outros.</p>
+      </details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  Orçamento Pronto · Ferramenta grátis para prestadores de serviço
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // ---------- Utilidades ----------
+  var $ = function (id) { return document.getElementById(id); };
+  var moeda = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+  var CHAVE_PERFIL = 'orcamento-pronto:perfil';
+  var CHAVE_RASCUNHO = 'orcamento-pronto:rascunho';
+
+  function lerStorage(chave) {
+    try { return JSON.parse(localStorage.getItem(chave) || 'null'); } catch (e) { return null; }
+  }
+  function gravarStorage(chave, valor) {
+    try { localStorage.setItem(chave, JSON.stringify(valor)); } catch (e) { /* armazenamento indisponível */ }
+  }
+  function apagarStorage(chave) {
+    try { localStorage.removeItem(chave); } catch (e) { /* armazenamento indisponível */ }
+  }
+
+  // Aceita "1.500,50", "1500,50" e "1500.50"
+  function numeroBR(texto) {
+    var s = String(texto || '').trim().replace(/[R$\s]/g, '');
+    if (!s) return 0;
+    if (s.indexOf(',') !== -1) s = s.replace(/\./g, '').replace(',', '.');
+    var n = parseFloat(s);
+    return isFinite(n) ? n : 0;
+  }
+  function soDigitos(s) { return String(s || '').replace(/\D/g, ''); }
+  function el(tag, texto, classe) {
+    var e = document.createElement(tag);
+    if (texto !== undefined && texto !== null) e.textContent = texto;
+    if (classe) e.className = classe;
+    return e;
+  }
+  function hoje() { return new Date(); }
+  function formatarData(d) { return d.toLocaleDateString('pt-BR'); }
+
+  // ---------- Estado ----------
+  var estado = {
+    numero: '',
+    data: formatarData(hoje()),
+    logo: '',
+    itens: []
+  };
+
+  function novoNumero() {
+    var d = hoje();
+    var pad = function (n) { return String(n).padStart(2, '0'); };
+    return d.getFullYear().toString().slice(2) + pad(d.getMonth() + 1) + pad(d.getDate()) + '-' + pad(d.getHours()) + pad(d.getMinutes());
+  }
+
+  function itemVazio() { return { desc: '', tipo: 'Serviço', qtd: '1', valor: '' }; }
+
+  // ---------- Itens ----------
+  function renderItens() {
+    var box = $('itens');
+    box.textContent = '';
+    estado.itens.forEach(function (it, i) {
+      var linha = el('div', null, 'item');
+
+      var desc = el('div', null, 'desc-linha');
+      var cDesc = el('div');
+      var lDesc = el('label', 'Descrição do item ' + (i + 1));
+      var iDesc = el('input');
+      iDesc.value = it.desc;
+      iDesc.placeholder = 'Ex.: Instalação de chuveiro elétrico';
+      iDesc.id = 'item-desc-' + i;
+      lDesc.htmlFor = iDesc.id;
+      iDesc.addEventListener('input', function () { it.desc = iDesc.value; atualizar(); });
+      cDesc.append(lDesc, iDesc);
+
+      var cTipo = el('div');
+      var lTipo = el('label', 'Tipo');
+      var sTipo = el('select');
+      sTipo.id = 'item-tipo-' + i;
+      lTipo.htmlFor = sTipo.id;
+      ['Serviço', 'Material'].forEach(function (t) {
+        var o = el('option', t); o.value = t; if (t === it.tipo) o.selected = true; sTipo.append(o);
+      });
+      sTipo.addEventListener('change', function () { it.tipo = sTipo.value; atualizar(); });
+      cTipo.append(lTipo, sTipo);
+      desc.append(cDesc, cTipo);
+
+      var cQtd = el('div', null, 'campo-qtd');
+      var lQtd = el('label', 'Qtd');
+      var iQtd = el('input');
+      iQtd.value = it.qtd; iQtd.inputMode = 'decimal'; iQtd.id = 'item-qtd-' + i;
+      lQtd.htmlFor = iQtd.id;
+      iQtd.addEventListener('input', function () { it.qtd = iQtd.value; atualizar(); });
+      cQtd.append(lQtd, iQtd);
+
+      var cVal = el('div', null, 'campo-valor');
+      var lVal = el('label', 'Valor unit. (R$)');
+      var iVal = el('input');
+      iVal.value = it.valor; iVal.inputMode = 'decimal'; iVal.placeholder = '0,00'; iVal.id = 'item-valor-' + i;
+      lVal.htmlFor = iVal.id;
+      iVal.addEventListener('input', function () { it.valor = iVal.value; atualizar(); });
+      cVal.append(lVal, iVal);
+
+      var rem = el('button', '×', 'remover');
+      rem.type = 'button';
+      rem.setAttribute('aria-label', 'Remover item ' + (i + 1));
+      rem.addEventListener('click', function () {
+        estado.itens.splice(i, 1);
+        if (!estado.itens.length) estado.itens.push(itemVazio());
+        renderItens(); atualizar();
+      });
+
+      linha.append(desc, cQtd, cVal, rem);
+      box.append(linha);
+    });
+  }
+
+  // ---------- Cálculos ----------
+  function calcular() {
+    var servicos = 0, materiais = 0;
+    estado.itens.forEach(function (it) {
+      var t = numeroBR(it.qtd) * numeroBR(it.valor);
+      if (it.tipo === 'Material') materiais += t; else servicos += t;
+    });
+    var subtotal = servicos + materiais;
+    var desconto = Math.min(numeroBR($('desconto').value), subtotal);
+    return { servicos: servicos, materiais: materiais, subtotal: subtotal, desconto: desconto, total: subtotal - desconto };
+  }
+
+  // ---------- Pré-visualização ----------
+  function atualizar() {
+    var v = function (id) { return $(id).value.trim(); };
+
+    $('p-emp-nome').textContent = v('emp-nome') || 'Seu nome ou empresa';
+    $('p-emp-nome').classList.toggle('vazio', !v('emp-nome'));
+    var info = [v('emp-tel'), v('emp-email'), v('emp-cidade'), v('emp-doc') ? 'CPF/CNPJ: ' + v('emp-doc') : '']
+      .filter(Boolean).join(' · ');
+    $('p-emp-info').textContent = info;
+    $('p-assina-emp').textContent = v('emp-nome') || 'Prestador';
+
+    var logo = $('p-logo');
+    if (estado.logo) { logo.src = estado.logo; logo.hidden = false; } else { logo.removeAttribute('src'); logo.hidden = true; }
+
+    $('p-numero').textContent = 'Nº ' + estado.numero;
+    $('p-data').textContent = estado.data;
+
+    var cli = $('p-cliente');
+    cli.textContent = '';
+    if (v('cli-nome') || v('cli-tel') || v('cli-end')) {
+      if (v('cli-nome')) cli.append(el('strong', v('cli-nome')), document.createElement('br'));
+      var linhaCli = [v('cli-tel'), v('cli-end')].filter(Boolean).join(' · ');
+      if (linhaCli) cli.append(document.createTextNode(linhaCli));
+    } else {
+      cli.append(el('span', 'Dados do cliente', 'vazio'));
+    }
+
+    var tbody = $('p-itens');
+    tbody.textContent = '';
+    var preenchidos = estado.itens.filter(function (it) { return it.desc.trim() || numeroBR(it.valor); });
+    if (!preenchidos.length) {
+      var tr = el('tr'); var td = el('td', 'Adicione os serviços e materiais', 'vazio'); td.colSpan = 4; tr.append(td); tbody.append(tr);
+    }
+    preenchidos.forEach(function (it) {
+      var tr = el('tr');
+      var tdDesc = el('td', it.desc.trim() || '—');
+      tdDesc.append(el('span', it.tipo, 'tipo-tag'));
+      var qtd = numeroBR(it.qtd), val = numeroBR(it.valor);
+      tr.append(tdDesc,
+        el('td', qtd.toLocaleString('pt-BR'), 'num'),
+        el('td', moeda.format(val), 'num'),
+        el('td', moeda.format(qtd * val), 'num'));
+      tbody.append(tr);
+    });
+
+    var c = calcular();
+    var tot = $('p-totais');
+    tot.textContent = '';
+    var linhaTot = function (rotulo, valor, classe) {
+      var d = el('div', null, classe); d.append(el('span', rotulo), el('span', valor)); tot.append(d);
+    };
+    if (c.servicos && c.materiais) {
+      linhaTot('Serviços', moeda.format(c.servicos));
+      linhaTot('Materiais', moeda.format(c.materiais));
+    }
+    if (c.desconto) {
+      linhaTot('Subtotal', moeda.format(c.subtotal));
+      linhaTot('Desconto', '− ' + moeda.format(c.desconto));
+    }
+    linhaTot('Total', moeda.format(c.total), 'total');
+
+    var cond = [];
+    if (v('prazo')) cond.push('Prazo de execução: ' + v('prazo'));
+    cond.push('Validade deste orçamento: ' + $('validade').value + ' dias');
+    if (v('pagamento')) cond.push('Pagamento: ' + v('pagamento'));
+    if (v('obs')) cond.push(v('obs'));
+    $('p-condicoes').textContent = cond.join('\n');
+
+    salvar();
+  }
+
+  // ---------- Salvar no aparelho ----------
+  var camposPerfil = Array.prototype.slice.call(document.querySelectorAll('[data-perfil]'));
+  var camposRascunho = ['cli-nome', 'cli-tel', 'cli-end', 'desconto', 'prazo', 'validade'];
+
+  function salvar() {
+    var perfil = { logo: estado.logo };
+    camposPerfil.forEach(function (c) { perfil[c.id] = c.value; });
+    gravarStorage(CHAVE_PERFIL, perfil);
+
+    var rascunho = { numero: estado.numero, data: estado.data, itens: estado.itens };
+    camposRascunho.forEach(function (id) { rascunho[id] = $(id).value; });
+    gravarStorage(CHAVE_RASCUNHO, rascunho);
+  }
+
+  function carregar() {
+    var perfil = lerStorage(CHAVE_PERFIL) || {};
+    camposPerfil.forEach(function (c) { if (typeof perfil[c.id] === 'string') c.value = perfil[c.id]; });
+    if (typeof perfil.logo === 'string' && perfil.logo.indexOf('data:image/') === 0) estado.logo = perfil.logo;
+
+    var r = lerStorage(CHAVE_RASCUNHO);
+    if (r && Array.isArray(r.itens) && r.itens.length) {
+      estado.numero = r.numero || novoNumero();
+      estado.data = r.data || formatarData(hoje());
+      estado.itens = r.itens.map(function (it) {
+        return { desc: String(it.desc || ''), tipo: it.tipo === 'Material' ? 'Material' : 'Serviço', qtd: String(it.qtd || ''), valor: String(it.valor || '') };
+      });
+      camposRascunho.forEach(function (id) { if (typeof r[id] === 'string') $(id).value = r[id]; });
+    } else {
+      estado.numero = novoNumero();
+      estado.itens = [itemVazio()];
+    }
+    mostrarLogoMini();
+  }
+
+  // ---------- Logo ----------
+  function mostrarLogoMini() {
+    var mini = $('logo-mini');
+    if (estado.logo) { mini.src = estado.logo; mini.hidden = false; $('logo-remover').hidden = false; }
+    else { mini.removeAttribute('src'); mini.hidden = true; $('logo-remover').hidden = true; }
+  }
+
+  // Reduz a imagem para não estourar o armazenamento do navegador
+  $('emp-logo').addEventListener('change', function (e) {
+    var arq = e.target.files && e.target.files[0];
+    if (!arq || arq.type.indexOf('image/') !== 0) return;
+    var leitor = new FileReader();
+    leitor.onload = function () {
+      var img = new Image();
+      img.onload = function () {
+        var max = 300, esc = Math.min(1, max / Math.max(img.width, img.height));
+        var cv = document.createElement('canvas');
+        cv.width = Math.round(img.width * esc); cv.height = Math.round(img.height * esc);
+        cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+        estado.logo = cv.toDataURL('image/png');
+        mostrarLogoMini(); atualizar();
+      };
+      img.src = leitor.result;
+    };
+    leitor.readAsDataURL(arq);
+  });
+  $('logo-remover').addEventListener('click', function () {
+    estado.logo = ''; $('emp-logo').value = ''; mostrarLogoMini(); atualizar();
+  });
+
+  // ---------- Ações ----------
+  $('add-item').addEventListener('click', function () {
+    estado.itens.push(itemVazio()); renderItens(); atualizar();
+    var ultimo = $('item-desc-' + (estado.itens.length - 1));
+    if (ultimo) ultimo.focus();
+  });
+
+  $('btn-pdf').addEventListener('click', function () {
+    var titulo = document.title;
+    var cliente = $('cli-nome').value.trim();
+    document.title = 'Orcamento-' + estado.numero + (cliente ? '-' + cliente.replace(/\s+/g, '-') : '');
+    window.print();
+    document.title = titulo;
+  });
+
+  $('btn-whats').addEventListener('click', function () {
+    var c = calcular();
+    var emp = $('emp-nome').value.trim();
+    var cliente = $('cli-nome').value.trim();
+    var linhas = [];
+    linhas.push('Olá' + (cliente ? ', ' + cliente : '') + '! Segue o orçamento nº ' + estado.numero + (emp ? ' de ' + emp : '') + ':');
+    linhas.push('');
+    estado.itens.forEach(function (it) {
+      if (!it.desc.trim() && !numeroBR(it.valor)) return;
+      var t = numeroBR(it.qtd) * numeroBR(it.valor);
+      linhas.push('• ' + (it.desc.trim() || 'Item') + ' (' + numeroBR(it.qtd).toLocaleString('pt-BR') + 'x) — ' + moeda.format(t));
+    });
+    if (c.desconto) linhas.push('Desconto: − ' + moeda.format(c.desconto));
+    linhas.push('');
+    linhas.push('*Total: ' + moeda.format(c.total) + '*');
+    if ($('prazo').value.trim()) linhas.push('Prazo: ' + $('prazo').value.trim());
+    if ($('pagamento').value.trim()) linhas.push('Pagamento: ' + $('pagamento').value.trim());
+    linhas.push('Validade: ' + $('validade').value + ' dias');
+    linhas.push('');
+    linhas.push('Fico à disposição para qualquer dúvida!');
+
+    var tel = soDigitos($('cli-tel').value);
+    if (tel && tel.length <= 11) tel = '55' + tel;
+    var url = 'https://wa.me/' + (tel || '') + '?text=' + encodeURIComponent(linhas.join('\n'));
+    window.open(url, '_blank', 'noopener');
+  });
+
+  $('btn-novo').addEventListener('click', function () {
+    if (!confirm('Começar um novo orçamento? Seus dados de profissional continuam salvos.')) return;
+    ['cli-nome', 'cli-tel', 'cli-end', 'desconto', 'prazo'].forEach(function (id) { $(id).value = ''; });
+    $('validade').value = '15';
+    estado.numero = novoNumero();
+    estado.data = formatarData(hoje());
+    estado.itens = [itemVazio()];
+    apagarStorage(CHAVE_RASCUNHO);
+    renderItens(); atualizar();
+    $('cli-nome').focus();
+  });
+
+  document.querySelectorAll('.ferramenta input, .ferramenta select, .ferramenta textarea').forEach(function (c) {
+    if (c.closest('#itens') || c.id === 'emp-logo') return;
+    c.addEventListener('input', atualizar);
+    c.addEventListener('change', atualizar);
+  });
+
+  // ---------- Lista de espera (Netlify Forms) ----------
+  $('form-espera').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var form = e.target;
+    var msg = $('msg-espera');
+    var botao = form.querySelector('button[type="submit"]');
+    botao.disabled = true;
+    msg.className = 'msg';
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    }).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      form.reset();
+      msg.textContent = 'Pronto! Você está na lista. Vamos te avisar pelo WhatsApp no lançamento.';
+      msg.className = 'msg ok';
+    }).catch(function () {
+      msg.textContent = 'Não foi possível enviar agora. Tente de novo em instantes.';
+      msg.className = 'msg erro';
+    }).then(function () { botao.disabled = false; });
+  });
+
+  // ---------- Início ----------
+  carregar();
+  renderItens();
+  atualizar();
+})();
+</script>
+</body>
+</html>
